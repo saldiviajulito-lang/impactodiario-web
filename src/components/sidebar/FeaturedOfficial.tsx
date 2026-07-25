@@ -1,14 +1,24 @@
 import Thumb from "@/components/common/Thumb";
 import { Official } from "@/types";
 
-export default function FeaturedOfficial({ official }: { official: Official }) {
+interface FeaturedOfficialProps {
+  official: Official;
+  highlight?: boolean;
+}
+
+export default function FeaturedOfficial({ official, highlight = false }: FeaturedOfficialProps) {
   return (
     <a href="#" className="group mb-6 block text-center">
-      <Thumb label={official.role} aspect="aspect-[4/5]" rounded="rounded-lg" />
-      <p className="mt-2 text-sm font-bold text-neutral-900 group-hover:text-red-600">
+      <Thumb
+        label={official.role}
+        aspect="aspect-square"
+        rounded="rounded-full"
+        className={highlight ? "border-4 border-[#e94560]" : "border border-white/10"}
+      />
+      <p className="mt-2 text-sm font-bold text-white group-hover:text-[#e94560]">
         {official.name}
       </p>
-      <p className="text-xs uppercase tracking-wide text-neutral-500">{official.role}</p>
+      <p className="text-xs uppercase tracking-wide text-white/50">{official.role}</p>
     </a>
   );
 }

@@ -7,7 +7,7 @@ import { officials, videos } from "@/data/sampleData";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-white">
+    <div className="flex min-h-screen flex-col">
       <Header />
 
       <AdBar />
@@ -22,19 +22,19 @@ export default function Home() {
 
           <AdBar />
 
-          <NewsVideoSection title="Policiales" items={videos.policiales} badge="Reel" />
+          <NewsVideoSection title="Policiales" items={videos.policiales} category="policiales" />
 
           <AdBar />
 
-          <NewsVideoSection title="Educación" items={videos.educacion} />
+          <NewsVideoSection title="Educación" items={videos.educacion} category="educacion" />
 
           <AdBar />
 
-          <NewsVideoSection title="Gremiales" items={videos.gremiales} />
+          <NewsVideoSection title="Gremiales" items={videos.gremiales} category="gremiales" />
 
           <AdBar />
 
-          <NewsVideoSection title="Nacionales" items={videos.nacionales} />
+          <NewsVideoSection title="Nacionales" items={videos.nacionales} category="nacionales" />
         </main>
 
         <Sidebar

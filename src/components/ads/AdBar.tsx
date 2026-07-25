@@ -16,7 +16,7 @@ export default function AdBar({ imageUrl, alt = "Publicidad", href }: AdBarProps
   );
 
   return (
-    <div className="my-4 w-full border-y border-neutral-200 bg-neutral-50 py-3">
+    <div className="my-4 w-full border-y border-white/10 bg-white/5 py-3">
       {href ? (
         <a href={href} target="_blank" rel="noopener noreferrer">
           {banner}

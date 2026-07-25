@@ -26,8 +26,8 @@ export default function Sidebar({
   diputados,
 }: SidebarProps) {
   return (
-    <aside className="w-full shrink-0 lg:w-1/4 lg:sticky lg:top-4 lg:self-start lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto">
-      <FeaturedOfficial official={gobernador} />
+    <aside className="w-full shrink-0 rounded-lg bg-[#12121c] p-4 lg:sticky lg:top-4 lg:w-1/4 lg:max-h-[calc(100vh-2rem)] lg:self-start lg:overflow-y-auto">
+      <FeaturedOfficial official={gobernador} highlight />
       <OfficialsGrid title="Intendentes" officials={intendentes} />
       <FeaturedOfficial official={vicegobernador} />
       <OfficialsGrid title="Legisladores Provinciales" officials={legisladores} />

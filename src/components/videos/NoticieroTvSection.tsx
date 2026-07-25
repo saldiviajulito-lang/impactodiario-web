@@ -35,14 +35,12 @@ export default function NoticieroTvSection({
         ))}
       </div>
 
-      <div className="flex justify-center">
-        <button
-          type="button"
-          className="rounded-full border-2 border-red-600 px-6 py-2 text-sm font-semibold uppercase text-red-600 transition-colors hover:bg-red-600 hover:text-white"
-        >
-          Ver todos los videos
-        </button>
-      </div>
+      <button
+        type="button"
+        className="w-full rounded-md border border-white/15 py-3 text-sm font-semibold uppercase tracking-wide text-white/60 transition-colors hover:border-white/30 hover:text-white"
+      >
+        Ver todos los videos
+      </button>
     </section>
   );
 }

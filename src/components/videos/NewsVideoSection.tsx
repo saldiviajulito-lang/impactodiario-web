@@ -1,14 +1,17 @@
 import SectionTitle from "@/components/common/SectionTitle";
 import VideoCard from "@/components/videos/VideoCard";
+import { categoryBadges, CategoryKey } from "@/lib/categoryBadges";
 import { VideoItem } from "@/types";
 
 interface NewsVideoSectionProps {
   title: string;
   items: VideoItem[];
-  badge?: string;
+  category: CategoryKey;
 }
 
-export default function NewsVideoSection({ title, items, badge }: NewsVideoSectionProps) {
+export default function NewsVideoSection({ title, items, category }: NewsVideoSectionProps) {
+  const badge = categoryBadges[category];
+
   return (
     <section className="mb-8">
       <SectionTitle>{title}</SectionTitle>
