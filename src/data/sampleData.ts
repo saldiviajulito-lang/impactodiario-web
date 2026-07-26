@@ -16,12 +16,17 @@ function slugify(name: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
-function official(id: string, name: string, role: string): Official {
-  return { id, name, role, photoUrl: `/funcionarios/${slugify(name)}.jpg` };
+function official(id: string, name: string, role: string, folder: string): Official {
+  return { id, name, role, photoUrl: `/funcionarios/${folder}/${slugify(name)}.jpg` };
 }
 
-function officialsFromNames(slug: string, role: string, names: string[]): Official[] {
-  return names.map((name, i) => official(`${slug}-${i + 1}`, name, role));
+function officialsFromNames(
+  slug: string,
+  role: string,
+  folder: string,
+  names: string[],
+): Official[] {
+  return names.map((name, i) => official(`${slug}-${i + 1}`, name, role, folder));
 }
 
 export const videos = {
@@ -35,19 +40,25 @@ export const videos = {
 };
 
 export const officials = {
-  gobernador: official("gobernador", "Gustavo Melella", "Gobernador"),
-  vicegobernador: official("vicegobernador", "Mónica Urquiza", "Vicegobernadora"),
+  gobernador: official("gobernador", "Gustavo Melella", "Gobernador", "GOBERNADOR"),
+  vicegobernador: official(
+    "vicegobernador",
+    "Mónica Urquiza",
+    "Vicegobernadora",
+    "VICE-GOBERNADORA",
+  ),
   intendentes: [
-    official("intendente-rio-grande", "Martín Pérez", "Intendente Río Grande"),
-    official("intendente-ushuaia", "Walter Vuoto", "Intendente Ushuaia"),
-    official("intendente-tolhuin", "Daniel Harrington", "Intendente Tolhuin"),
+    official("intendente-rio-grande", "Martín Pérez", "Intendente Río Grande", "INTENDENTES"),
+    official("intendente-ushuaia", "Walter Vuoto", "Intendente Ushuaia", "INTENDENTES"),
+    official("intendente-tolhuin", "Daniel Harrington", "Intendente Tolhuin", "INTENDENTES"),
   ],
   viceintendentaUshuaia: official(
     "viceintendenta-ushuaia",
     "Gabriela Muñíz Siccardi",
     "Viceintendenta Ushuaia",
+    "INTENDENTES",
   ),
-  legisladores: officialsFromNames("legislador", "Legislador Provincial", [
+  legisladores: officialsFromNames("legislador", "Legislador Provincial", "LEGISLADORES", [
     "Federico Grave",
     "Federico Sciurano",
     "Myriam Martínez",
@@ -64,42 +75,51 @@ export const officials = {
     "Juan M. Lapadula",
     "Gisela Dos Santos",
   ]),
-  concejalesRioGrande: officialsFromNames("concejal-rg", "Concejal Río Grande", [
-    "Guadalupe Zamora",
-    "Alejandra Arce",
-    "Lucia Rossi",
-    "Jonatan Bogado",
-    "Federico Runín",
-    "Matías Loffler",
-    "Walter Abregú",
-    "Maximiliano Ybars",
-    "Florencia Vargas",
-  ]),
-  concejalesUshuaia: officialsFromNames("concejal-ush", "Concejal Ushuaia", [
-    "Laura Ávila",
-    "Gabriela de la Vega",
-    "Nicolás Pelloli",
-    "Vanina O. Maldonado",
-    "Daiana Freiberger",
-    "Fernando Santana",
-    "Analía L. Escalante",
-    "Vladimir Espeche",
-    "María Monte de Oca",
-    "Valter Tavarone",
-  ]),
-  concejalesTolhuin: officialsFromNames("concejal-tol", "Concejal Tolhuin", [
-    "Matías Rodríguez",
-    "Rosana Taberna",
-    "Jeannette Alderete",
-    "Marcelo M. Muñoz",
-    "María F. Auat",
-  ]),
-  senadores: officialsFromNames("senador", "Senador Nacional", [
+  concejalesRioGrande: officialsFromNames(
+    "concejal-rg",
+    "Concejal Río Grande",
+    "CONCEJALES-RG",
+    [
+      "Guadalupe Zamora",
+      "Alejandra Arce",
+      "Lucia Rossi",
+      "Jonatan Bogado",
+      "Federico Runín",
+      "Matías Loffler",
+      "Walter Abregú",
+      "Maximiliano Ybars",
+      "Florencia Vargas",
+    ],
+  ),
+  concejalesUshuaia: officialsFromNames(
+    "concejal-ush",
+    "Concejal Ushuaia",
+    "CONCEJALES-USH",
+    [
+      "Laura Ávila",
+      "Gabriela de la Vega",
+      "Nicolás Pelloli",
+      "Vanina O. Maldonado",
+      "Daiana Freiberger",
+      "Fernando Santana",
+      "Analía L. Escalante",
+      "Vladimir Espeche",
+      "María Monte de Oca",
+      "Valter Tavarone",
+    ],
+  ),
+  concejalesTolhuin: officialsFromNames(
+    "concejal-tol",
+    "Concejal Tolhuin",
+    "CONCEJALES-TOLH",
+    ["Matías Rodríguez", "Rosana Taberna", "Jeannette Alderete", "Marcelo M. Muñoz", "María F. Auat"],
+  ),
+  senadores: officialsFromNames("senador", "Senador Nacional", "SENADORES", [
     "Agustín Coto",
     "Belén Monte de Oca",
     "Cristina López",
   ]),
-  diputados: officialsFromNames("diputado", "Diputado Nacional", [
+  diputados: officialsFromNames("diputado", "Diputado Nacional", "DIPUTADOS", [
     "Andrea Freites",
     "Jorge Araujo",
     "Santiago Pauli",
