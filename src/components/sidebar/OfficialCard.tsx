@@ -1,14 +1,16 @@
-import Thumb from "@/components/common/Thumb";
+import OfficialPhoto from "@/components/common/OfficialPhoto";
 import { Official } from "@/types";
 
 export default function OfficialCard({ official }: { official: Official }) {
   return (
     <a href="#" className="group block text-center">
-      <Thumb
+      <OfficialPhoto
+        photoUrl={official.photoUrl}
         label={official.role}
         aspect="aspect-square"
         rounded="rounded-full"
         className="border border-white/10"
+        sizes="80px"
       />
       <p className="mt-1 truncate text-[11px] font-semibold text-white group-hover:text-[#e94560]">
         {official.name}

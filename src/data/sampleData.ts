@@ -7,12 +7,21 @@ function makeVideos(slug: string, count: number): VideoItem[] {
   }));
 }
 
+function slugify(name: string): string {
+  return name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function official(id: string, name: string, role: string): Official {
+  return { id, name, role, photoUrl: `/funcionarios/${slugify(name)}.jpg` };
+}
+
 function officialsFromNames(slug: string, role: string, names: string[]): Official[] {
-  return names.map((name, i) => ({
-    id: `${slug}-${i + 1}`,
-    name,
-    role,
-  }));
+  return names.map((name, i) => official(`${slug}-${i + 1}`, name, role));
 }
 
 export const videos = {
@@ -26,18 +35,18 @@ export const videos = {
 };
 
 export const officials = {
-  gobernador: { id: "gobernador", name: "Gustavo Melella", role: "Gobernador" } as Official,
-  vicegobernador: { id: "vicegobernador", name: "Mónica Urquiza", role: "Vicegobernadora" } as Official,
+  gobernador: official("gobernador", "Gustavo Melella", "Gobernador"),
+  vicegobernador: official("vicegobernador", "Mónica Urquiza", "Vicegobernadora"),
   intendentes: [
-    { id: "intendente-rio-grande", name: "Martín Pérez", role: "Intendente Río Grande" },
-    { id: "intendente-ushuaia", name: "Walter Vuoto", role: "Intendente Ushuaia" },
-    { id: "intendente-tolhuin", name: "Daniel Harrington", role: "Intendente Tolhuin" },
-  ] as Official[],
-  viceintendentaUshuaia: {
-    id: "viceintendenta-ushuaia",
-    name: "Gabriela Muñíz Siccardi",
-    role: "Viceintendenta Ushuaia",
-  } as Official,
+    official("intendente-rio-grande", "Martín Pérez", "Intendente Río Grande"),
+    official("intendente-ushuaia", "Walter Vuoto", "Intendente Ushuaia"),
+    official("intendente-tolhuin", "Daniel Harrington", "Intendente Tolhuin"),
+  ],
+  viceintendentaUshuaia: official(
+    "viceintendenta-ushuaia",
+    "Gabriela Muñíz Siccardi",
+    "Viceintendenta Ushuaia",
+  ),
   legisladores: officialsFromNames("legislador", "Legislador Provincial", [
     "Federico Grave",
     "Federico Sciurano",

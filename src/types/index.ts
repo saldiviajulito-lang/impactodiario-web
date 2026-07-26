@@ -7,4 +7,5 @@ export interface Official {
   id: string;
   name: string;
   role: string;
+  photoUrl?: string;
 }
