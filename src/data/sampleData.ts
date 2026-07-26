@@ -7,14 +7,6 @@ function makeVideos(slug: string, count: number): VideoItem[] {
   }));
 }
 
-function makeOfficials(slug: string, role: string, count: number): Official[] {
-  return Array.from({ length: count }, (_, i) => ({
-    id: `${slug}-${i + 1}`,
-    name: `Nombre Apellido ${i + 1}`,
-    role,
-  }));
-}
-
 function officialsFromNames(slug: string, role: string, names: string[]): Official[] {
   return names.map((name, i) => ({
     id: `${slug}-${i + 1}`,
@@ -93,6 +85,16 @@ export const officials = {
     "Marcelo M. Muñoz",
     "María F. Auat",
   ]),
-  senadores: makeOfficials("senador", "Senador Nacional", 3),
-  diputados: makeOfficials("diputado", "Diputado Nacional", 5),
+  senadores: officialsFromNames("senador", "Senador Nacional", [
+    "Agustín Coto",
+    "Belén Monte de Oca",
+    "Cristina López",
+  ]),
+  diputados: officialsFromNames("diputado", "Diputado Nacional", [
+    "Andrea Freites",
+    "Jorge Araujo",
+    "Santiago Pauli",
+    "Víctor Hugo Ponce",
+    "Viviana Salamanca",
+  ]),
 };
