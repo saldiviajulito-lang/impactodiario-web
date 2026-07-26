@@ -41,6 +41,7 @@ export default function Home() {
           gobernador={officials.gobernador}
           vicegobernador={officials.vicegobernador}
           intendentes={officials.intendentes}
+          viceintendentaUshuaia={officials.viceintendentaUshuaia}
           legisladores={officials.legisladores}
           concejalesRioGrande={officials.concejalesRioGrande}
           concejalesUshuaia={officials.concejalesUshuaia}

@@ -6,6 +6,7 @@ interface SidebarProps {
   gobernador: Official;
   vicegobernador: Official;
   intendentes: Official[];
+  viceintendentaUshuaia: Official;
   legisladores: Official[];
   concejalesRioGrande: Official[];
   concejalesUshuaia: Official[];
@@ -18,6 +19,7 @@ export default function Sidebar({
   gobernador,
   vicegobernador,
   intendentes,
+  viceintendentaUshuaia,
   legisladores,
   concejalesRioGrande,
   concejalesUshuaia,
@@ -32,6 +34,7 @@ export default function Sidebar({
       <FeaturedOfficial official={vicegobernador} />
       <OfficialsGrid title="Legisladores Provinciales" officials={legisladores} />
       <OfficialsGrid title="Concejales Río Grande" officials={concejalesRioGrande} />
+      <FeaturedOfficial official={viceintendentaUshuaia} />
       <OfficialsGrid title="Concejales Ushuaia" officials={concejalesUshuaia} />
       <OfficialsGrid title="Concejales Tolhuin" officials={concejalesTolhuin} />
       <OfficialsGrid title="Senadores Nacionales" officials={senadores} />
