@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import OfficialPhoto from "@/components/common/OfficialPhoto";
 import { Official } from "@/types";
 
@@ -8,7 +10,7 @@ interface FeaturedOfficialProps {
 
 export default function FeaturedOfficial({ official, highlight = false }: FeaturedOfficialProps) {
   return (
-    <a href="#" className="group mb-6 block text-center">
+    <Link href={`/funcionario/${official.slug}`} className="group mb-6 block text-center">
       <OfficialPhoto
         photoUrl={official.photoUrl}
         label={official.role}
@@ -21,6 +23,6 @@ export default function FeaturedOfficial({ official, highlight = false }: Featur
         {official.name}
       </p>
       <p className="text-xs uppercase tracking-wide text-white/50">{official.role}</p>
-    </a>
+    </Link>
   );
 }

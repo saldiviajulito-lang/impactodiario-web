@@ -23,7 +23,14 @@ function official(
   folder: string,
   ext: string = "jpg",
 ): Official {
-  return { id, name, role, photoUrl: `/funcionarios/${folder}/${slugify(name)}.${ext}` };
+  return {
+    id,
+    slug: slugify(name),
+    name,
+    role,
+    category: folder,
+    photoUrl: `/funcionarios/${folder}/${slugify(name)}.${ext}`,
+  };
 }
 
 function officialsFromNames(
@@ -134,3 +141,26 @@ export const officials = {
     "Miguel Rodriguez",
   ]),
 };
+
+export function getAllOfficials(): Official[] {
+  return [
+    officials.gobernador,
+    officials.vicegobernador,
+    ...officials.intendentes,
+    officials.viceintendentaUshuaia,
+    ...officials.legisladores,
+    ...officials.concejalesRioGrande,
+    ...officials.concejalesUshuaia,
+    ...officials.concejalesTolhuin,
+    ...officials.senadores,
+    ...officials.diputados,
+  ];
+}
+
+export function getOfficialBySlug(slug: string): Official | undefined {
+  return getAllOfficials().find((o) => o.slug === slug);
+}
+
+export function getOfficialVideos(slug: string): VideoItem[] {
+  return makeVideos(`funcionario-${slug}`, 8);
+}

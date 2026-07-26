@@ -1,9 +1,11 @@
+import Link from "next/link";
+
 import OfficialPhoto from "@/components/common/OfficialPhoto";
 import { Official } from "@/types";
 
 export default function OfficialCard({ official }: { official: Official }) {
   return (
-    <a href="#" className="group block text-center">
+    <Link href={`/funcionario/${official.slug}`} className="group block text-center">
       <OfficialPhoto
         photoUrl={official.photoUrl}
         label={official.role}
@@ -16,6 +18,6 @@ export default function OfficialCard({ official }: { official: Official }) {
         {official.name}
       </p>
       <p className="truncate text-[10px] text-white/50">{official.role}</p>
-    </a>
+    </Link>
   );
 }

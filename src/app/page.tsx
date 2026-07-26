@@ -3,7 +3,7 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/sidebar/Sidebar";
 import NewsVideoSection from "@/components/videos/NewsVideoSection";
 import NoticieroTvSection from "@/components/videos/NoticieroTvSection";
-import { officials, videos } from "@/data/sampleData";
+import { videos } from "@/data/sampleData";
 
 export default function Home() {
   return (
@@ -37,18 +37,7 @@ export default function Home() {
           <NewsVideoSection title="Nacionales" items={videos.nacionales} category="nacionales" />
         </main>
 
-        <Sidebar
-          gobernador={officials.gobernador}
-          vicegobernador={officials.vicegobernador}
-          intendentes={officials.intendentes}
-          viceintendentaUshuaia={officials.viceintendentaUshuaia}
-          legisladores={officials.legisladores}
-          concejalesRioGrande={officials.concejalesRioGrande}
-          concejalesUshuaia={officials.concejalesUshuaia}
-          concejalesTolhuin={officials.concejalesTolhuin}
-          senadores={officials.senadores}
-          diputados={officials.diputados}
-        />
+        <Sidebar />
       </div>
     </div>
   );
