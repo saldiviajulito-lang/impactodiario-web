@@ -16,8 +16,14 @@ function slugify(name: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
-function official(id: string, name: string, role: string, folder: string): Official {
-  return { id, name, role, photoUrl: `/funcionarios/${folder}/${slugify(name)}.jpg` };
+function official(
+  id: string,
+  name: string,
+  role: string,
+  folder: string,
+  ext: string = "jpg",
+): Official {
+  return { id, name, role, photoUrl: `/funcionarios/${folder}/${slugify(name)}.${ext}` };
 }
 
 function officialsFromNames(
@@ -40,12 +46,13 @@ export const videos = {
 };
 
 export const officials = {
-  gobernador: official("gobernador", "Gustavo Melella", "Gobernador", "GOBERNADOR"),
+  gobernador: official("gobernador", "Gustavo Melella", "Gobernador", "GOBERNADOR", "png"),
   vicegobernador: official(
     "vicegobernador",
     "Mónica Urquiza",
     "Vicegobernadora",
     "VICE-GOBERNADORA",
+    "png",
   ),
   intendentes: [
     official("intendente-rio-grande", "Martín Pérez", "Intendente Río Grande", "INTENDENTES"),
@@ -97,14 +104,14 @@ export const officials = {
     "CONCEJALES-USH",
     [
       "Laura Ávila",
-      "Gabriela de la Vega",
+      "Gabriel de la Vega",
       "Nicolás Pelloli",
       "Vanina O. Maldonado",
       "Daiana Freiberger",
       "Fernando Santana",
       "Analía L. Escalante",
       "Vladimir Espeche",
-      "María Monte de Oca",
+      "Marjorette Saldias",
       "Valter Tavarone",
     ],
   ),
@@ -123,7 +130,7 @@ export const officials = {
     "Andrea Freites",
     "Jorge Araujo",
     "Santiago Pauli",
-    "Víctor Hugo Ponce",
-    "Viviana Salamanca",
+    "Agustín Tita",
+    "Miguel Rodriguez",
   ]),
 };

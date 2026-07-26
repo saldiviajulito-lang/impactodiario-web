@@ -10,6 +10,13 @@ Si un archivo no existe todavía, el sitio muestra el placeholder gris
 automáticamente. No hace falta tocar código: apenas subís el archivo con el
 nombre correcto en la carpeta correcta, la foto aparece sola.
 
+> ⚠️ **El nombre del archivo tiene que ser EXACTO**: todo en minúsculas, sin
+> espacios (usá guiones `-`), sin prefijos como "Intendente" o el cargo, y
+> con la extensión indicada en la tabla de abajo (`.jpg` o `.png`, no son
+> intercambiables porque cada funcionario tiene una extensión fija en
+> `sampleData.ts`). Por ejemplo `martin-perez.jpg`, **no**
+> `Intendentemartin perez.jpg` ni `martin-perez.png`.
+
 ## Estructura de carpetas
 
 ```
@@ -29,13 +36,13 @@ public/funcionarios/
 
 | Nombre | Archivo esperado |
 |---|---|
-| Gustavo Melella | `gustavo-melella.jpg` |
+| Gustavo Melella | `gustavo-melella.png` |
 
 ## VICE-GOBERNADORA/
 
 | Nombre | Archivo esperado |
 |---|---|
-| Mónica Urquiza | `monica-urquiza.jpg` |
+| Mónica Urquiza | `monica-urquiza.png` |
 
 ## INTENDENTES/
 
