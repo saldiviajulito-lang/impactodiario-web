@@ -1,9 +1,11 @@
 import AdBar from "@/components/ads/AdBar";
+import FacebookReelsSection from "@/components/facebook/FacebookReelsSection";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/sidebar/Sidebar";
 import NewsVideoSection from "@/components/videos/NewsVideoSection";
 import NoticieroTvSection from "@/components/videos/NoticieroTvSection";
 import { videos } from "@/data/sampleData";
+import { policialesReels } from "@/lib/facebookReels";
 import { getLatestChannelVideos } from "@/lib/youtube";
 import { VideoItem } from "@/types";
 
@@ -66,7 +68,7 @@ export default async function Home() {
 
           <AdBar />
 
-          <NewsVideoSection title="Policiales" items={videos.policiales} category="policiales" />
+          <FacebookReelsSection title="Policiales" reels={policialesReels} />
 
           <AdBar />
 

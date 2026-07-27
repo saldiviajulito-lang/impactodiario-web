@@ -46,7 +46,6 @@ export const videos = {
   noticieroDestacados: makeVideos("noticiero-destacado", 2),
   noticieroFila1: makeVideos("noticiero-fila1", 4),
   noticieroFila2: makeVideos("noticiero-fila2", 4),
-  policiales: makeVideos("policiales", 4),
   educacion: makeVideos("educacion", 4),
   gremiales: makeVideos("gremiales", 4),
   nacionales: makeVideos("nacionales", 4),
