@@ -1,6 +1,8 @@
 export interface VideoItem {
   id: string;
   title: string;
+  thumbnailUrl?: string;
+  url?: string;
 }
 
 export interface Official {

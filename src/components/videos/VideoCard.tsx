@@ -9,13 +9,26 @@ interface VideoCardProps {
 }
 
 export default function VideoCard({ video, size = "md", badge }: VideoCardProps) {
+  const isExternal = Boolean(video.url);
+
   return (
     <a
-      href="#"
+      href={video.url ?? "#"}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       className="group block overflow-hidden rounded-lg border border-white/10 bg-[#1a1a2e] transition-colors hover:border-[#e94560]/60"
     >
       <div className="relative">
-        <Thumb label={video.title} aspect="aspect-video" rounded="rounded-none" />
+        {video.thumbnailUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={video.thumbnailUrl}
+            alt={video.title}
+            className="aspect-video w-full object-cover"
+          />
+        ) : (
+          <Thumb label={video.title} aspect="aspect-video" rounded="rounded-none" />
+        )}
         <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <span className="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white transition-colors group-hover:bg-[#e94560]">
             ▶
