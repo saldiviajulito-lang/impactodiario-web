@@ -1,4 +1,4 @@
-import AdBar from "@/components/ads/AdBar";
+import AdBlock from "@/components/ads/AdBlock";
 import FacebookReelsSection from "@/components/facebook/FacebookReelsSection";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/sidebar/Sidebar";
@@ -56,7 +56,7 @@ export default async function Home() {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <AdBar />
+      <AdBlock block={1} />
 
       <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-8 px-4 py-6 lg:flex-row">
         <main className="w-full lg:w-3/4">
@@ -66,19 +66,19 @@ export default async function Home() {
             fila2={noticiero.fila2}
           />
 
-          <AdBar />
+          <AdBlock block={2} />
 
           <FacebookReelsSection title="Policiales" reels={policialesReels} />
 
-          <AdBar />
+          <AdBlock block={3} />
 
           <NewsVideoSection title="Educación" items={videos.educacion} category="educacion" />
 
-          <AdBar />
+          <AdBlock block={4} />
 
           <NewsVideoSection title="Gremiales" items={videos.gremiales} category="gremiales" />
 
-          <AdBar />
+          <AdBlock block={5} />
 
           <NewsVideoSection title="Nacionales" items={videos.nacionales} category="nacionales" />
         </main>
