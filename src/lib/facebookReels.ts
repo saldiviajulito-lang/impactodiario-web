@@ -13,4 +13,9 @@ export interface FacebookReel {
  * https://www.facebook.com/reel/XXXXXXXXXXXXXXX) y agregala acá abajo.
  * Mientras la lista esté vacía se muestra "Próximamente coberturas en vivo".
  */
-export const policialesReels: FacebookReel[] = [];
+export const policialesReels: FacebookReel[] = [
+  {
+    id: "reel-1",
+    url: "https://www.facebook.com/reel/1012556854989000/?s=fb_shorts_profile&stack_idx=0",
+  },
+];
