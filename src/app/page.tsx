@@ -56,10 +56,10 @@ export default async function Home() {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <AdBlock block={1} />
-
       <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-8 px-4 py-6 lg:flex-row">
         <main className="w-full lg:w-3/4">
+          <AdBlock block={1} />
+
           <NoticieroTvSection
             destacados={noticiero.destacados}
             fila1={noticiero.fila1}
