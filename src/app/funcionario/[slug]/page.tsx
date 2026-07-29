@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import AdBar from "@/components/ads/AdBar";
+import BackToHomeButton from "@/components/common/BackToHomeButton";
 import OfficialHeader from "@/components/official/OfficialHeader";
 import Sidebar from "@/components/sidebar/Sidebar";
 import OfficialVideosSection from "@/components/videos/OfficialVideosSection";
@@ -59,6 +60,8 @@ export default async function FuncionarioPage({ params }: FuncionarioPageProps) 
 
         <Sidebar />
       </div>
+
+      <BackToHomeButton />
     </div>
   );
 }
