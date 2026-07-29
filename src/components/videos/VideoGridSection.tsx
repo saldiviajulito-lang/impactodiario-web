@@ -2,23 +2,21 @@ import SectionTitle from "@/components/common/SectionTitle";
 import VideoCard from "@/components/videos/VideoCard";
 import { VideoItem } from "@/types";
 
-interface OfficialVideosSectionProps {
-  officialName: string;
+interface VideoGridSectionProps {
+  title: string;
   videos: VideoItem[];
+  emptyMessage: string;
 }
 
-export default function OfficialVideosSection({
-  officialName,
-  videos,
-}: OfficialVideosSectionProps) {
+export default function VideoGridSection({ title, videos, emptyMessage }: VideoGridSectionProps) {
   return (
     <section className="mb-8">
-      <SectionTitle>Videos de {officialName}</SectionTitle>
+      <SectionTitle>{title}</SectionTitle>
 
       {videos.length === 0 ? (
         <div className="flex items-center justify-center rounded-lg border border-white/10 bg-[#1a1a2e] py-16 text-center">
           <p className="text-sm font-medium uppercase tracking-wide text-white/40">
-            Próximamente videos de este funcionario
+            {emptyMessage}
           </p>
         </div>
       ) : (
