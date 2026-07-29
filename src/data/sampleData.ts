@@ -159,7 +159,3 @@ export function getAllOfficials(): Official[] {
 export function getOfficialBySlug(slug: string): Official | undefined {
   return getAllOfficials().find((o) => o.slug === slug);
 }
-
-export function getOfficialVideos(slug: string): VideoItem[] {
-  return makeVideos(`funcionario-${slug}`, 8);
-}
