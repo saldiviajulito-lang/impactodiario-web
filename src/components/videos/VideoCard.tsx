@@ -16,7 +16,7 @@ export default function VideoCard({ video, size = "md", badge }: VideoCardProps)
       href={video.url ?? "#"}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
-      className="group block overflow-hidden rounded-lg border border-white/10 bg-[#1a1a2e] transition-colors hover:border-[#e94560]/60"
+      className="group block overflow-hidden rounded-lg border border-white/10 bg-[#1a1a2e] transition-colors hover:border-[#16a34a]/60"
     >
       <div className="relative">
         {video.thumbnailUrl ? (
@@ -30,7 +30,7 @@ export default function VideoCard({ video, size = "md", badge }: VideoCardProps)
           <Thumb label={video.title} aspect="aspect-video" rounded="rounded-none" />
         )}
         <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white transition-colors group-hover:bg-[#e94560]">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white transition-colors group-hover:bg-[#16a34a]">
             ▶
           </span>
         </span>
@@ -44,7 +44,7 @@ export default function VideoCard({ video, size = "md", badge }: VideoCardProps)
         )}
       </div>
       <p
-        className={`px-3 py-2 line-clamp-2 font-medium text-white group-hover:text-[#e94560] ${
+        className={`px-3 py-2 line-clamp-2 font-medium text-white group-hover:text-[#16a34a] ${
           size === "lg" ? "text-base" : "text-sm"
         }`}
       >

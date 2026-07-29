@@ -9,7 +9,7 @@ interface OfficialsGridProps {
 export default function OfficialsGrid({ title, officials }: OfficialsGridProps) {
   return (
     <section className="mb-6">
-      <h3 className="mb-3 border-b-2 border-[#e94560] pb-1 text-xs font-bold uppercase tracking-wide text-white/70">
+      <h3 className="mb-3 border-b-2 border-[#16a34a] pb-1 text-xs font-bold uppercase tracking-wide text-white/70">
         {title}
       </h3>
       <div className="grid grid-cols-3 gap-3">

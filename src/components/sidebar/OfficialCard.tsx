@@ -14,7 +14,7 @@ export default function OfficialCard({ official }: { official: Official }) {
         className="border border-white/10"
         sizes="80px"
       />
-      <p className="mt-1 truncate text-[11px] font-semibold text-white group-hover:text-[#e94560]">
+      <p className="mt-1 truncate text-[11px] font-semibold text-white group-hover:text-[#16a34a]">
         {official.name}
       </p>
       <p className="truncate text-[10px] text-white/50">{official.role}</p>

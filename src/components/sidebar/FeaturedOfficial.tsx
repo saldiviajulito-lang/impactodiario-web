@@ -16,10 +16,10 @@ export default function FeaturedOfficial({ official, highlight = false }: Featur
         label={official.role}
         aspect="aspect-square"
         rounded="rounded-full"
-        className={highlight ? "border-4 border-[#e94560]" : "border border-white/10"}
+        className={highlight ? "border-4 border-[#16a34a]" : "border border-white/10"}
         sizes="180px"
       />
-      <p className="mt-2 text-sm font-bold text-white group-hover:text-[#e94560]">
+      <p className="mt-2 text-sm font-bold text-white group-hover:text-[#16a34a]">
         {official.name}
       </p>
       <p className="text-xs uppercase tracking-wide text-white/50">{official.role}</p>

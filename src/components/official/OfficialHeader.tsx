@@ -11,14 +11,14 @@ export default function OfficialHeader({ official }: { official: Official }) {
           label={official.role}
           aspect="aspect-square"
           rounded="rounded-full"
-          className="w-40 border-4 border-[#e94560] sm:w-48"
+          className="w-40 border-4 border-[#16a34a] sm:w-48"
           sizes="200px"
         />
         <div className="text-center sm:text-left">
           <h1 className="text-3xl font-extrabold uppercase tracking-wide text-white sm:text-4xl">
             {official.name}
           </h1>
-          <p className="mt-2 text-lg font-semibold text-[#e94560]">{getShortRole(official)}</p>
+          <p className="mt-2 text-lg font-semibold text-[#16a34a]">{getShortRole(official)}</p>
           <p className="mt-1 text-sm text-white/50">{getInstitutionLine(official)}</p>
         </div>
       </div>
