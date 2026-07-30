@@ -10,8 +10,8 @@ import { getAllOfficials, getOfficialBySlug } from "@/data/sampleData";
 import { getPublicacionesByFuncionario } from "@/lib/publicaciones";
 
 // Vuelve a generar la página (con las publicaciones más recientes de
-// Supabase) como máximo cada 10 minutos, sin necesitar un redeploy.
-export const revalidate = 600;
+// Supabase) como máximo cada 60 segundos, sin necesitar un redeploy.
+export const revalidate = 60;
 
 interface FuncionarioPageProps {
   params: Promise<{ slug: string }>;

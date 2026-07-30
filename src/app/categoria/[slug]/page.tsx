@@ -16,8 +16,8 @@ const CATEGORIA_LABELS: Record<string, string> = {
 };
 
 // Vuelve a generar la página (con las publicaciones más recientes de
-// Supabase) como máximo cada 10 minutos, sin necesitar un redeploy.
-export const revalidate = 600;
+// Supabase) como máximo cada 60 segundos, sin necesitar un redeploy.
+export const revalidate = 60;
 
 interface CategoriaPageProps {
   params: Promise<{ slug: string }>;
