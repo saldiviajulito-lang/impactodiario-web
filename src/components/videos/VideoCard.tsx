@@ -1,5 +1,9 @@
+"use client";
+
 import Thumb from "@/components/common/Thumb";
+import { useVideoPlayer } from "@/context/VideoPlayerContext";
 import { CategoryBadge } from "@/lib/categoryBadges";
+import { extractYoutubeVideoId } from "@/lib/extractYoutubeId";
 import { VideoItem } from "@/types";
 
 interface VideoCardProps {
@@ -9,15 +13,11 @@ interface VideoCardProps {
 }
 
 export default function VideoCard({ video, size = "md", badge }: VideoCardProps) {
-  const isExternal = Boolean(video.url);
+  const { openVideo } = useVideoPlayer();
+  const youtubeId = video.url ? extractYoutubeVideoId(video.url) : null;
 
-  return (
-    <a
-      href={video.url ?? "#"}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener noreferrer" : undefined}
-      className="group block overflow-hidden rounded-lg border border-white/10 bg-[#1a1a2e] transition-colors hover:border-[#16a34a]/60"
-    >
+  const content = (
+    <>
       <div className="relative">
         {video.thumbnailUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -50,6 +50,24 @@ export default function VideoCard({ video, size = "md", badge }: VideoCardProps)
       >
         {video.title}
       </p>
-    </a>
+    </>
+  );
+
+  if (youtubeId) {
+    return (
+      <button
+        type="button"
+        onClick={() => openVideo(youtubeId)}
+        className="group block w-full overflow-hidden rounded-lg border border-white/10 bg-[#1a1a2e] text-left transition-colors hover:border-[#16a34a]/60"
+      >
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <div className="block overflow-hidden rounded-lg border border-white/10 bg-[#1a1a2e]">
+      {content}
+    </div>
   );
 }

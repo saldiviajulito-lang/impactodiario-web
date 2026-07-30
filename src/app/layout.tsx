@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
+import VideoPlayerModal from "@/components/video-player/VideoPlayerModal";
+import { VideoPlayerProvider } from "@/context/VideoPlayerContext";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,7 +38,10 @@ export default function RootLayout({
           strategy="afterInteractive"
           crossOrigin="anonymous"
         />
-        {children}
+        <VideoPlayerProvider>
+          {children}
+          <VideoPlayerModal />
+        </VideoPlayerProvider>
       </body>
     </html>
   );
