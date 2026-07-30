@@ -14,6 +14,6 @@ function getFormattedDate(): string {
 
 export default function HeaderDate() {
   return (
-    <p className="hidden text-sm font-medium text-white/80 sm:block">{getFormattedDate()}</p>
+    <p className="ml-auto text-xs font-medium text-white/80 sm:text-sm">{getFormattedDate()}</p>
   );
 }
