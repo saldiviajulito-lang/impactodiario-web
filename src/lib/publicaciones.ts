@@ -1,4 +1,5 @@
 import { getSupabaseClient } from "@/lib/supabase";
+import { filterAvailableVideos } from "@/lib/youtube";
 import { Publicacion, VideoItem } from "@/types";
 
 function toVideoItems(rows: Publicacion[]): VideoItem[] {
@@ -31,7 +32,8 @@ export async function getPublicacionesByFuncionario(slug: string): Promise<Video
       throw error;
     }
 
-    return toVideoItems((data ?? []) as Publicacion[]);
+    const items = toVideoItems((data ?? []) as Publicacion[]);
+    return await filterAvailableVideos(items);
   } catch (error) {
     console.error(`No se pudieron obtener publicaciones de Supabase para "${slug}":`, error);
     return [];
@@ -69,7 +71,8 @@ export async function getPublicacionesByCategoria(
       throw error;
     }
 
-    return toVideoItems((data ?? []) as Publicacion[]);
+    const items = toVideoItems((data ?? []) as Publicacion[]);
+    return await filterAvailableVideos(items);
   } catch (error) {
     console.error(`No se pudieron obtener publicaciones de Supabase para categoria "${categoria}":`, error);
     return [];
