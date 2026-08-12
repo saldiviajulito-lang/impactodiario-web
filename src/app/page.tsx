@@ -5,9 +5,15 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import NewsVideoSection from "@/components/videos/NewsVideoSection";
 import NoticieroTvSection from "@/components/videos/NoticieroTvSection";
 import { videos } from "@/data/sampleData";
+import { CategoryKey } from "@/lib/categoryBadges";
 import { policialesReels } from "@/lib/facebookReels";
+import { getPublicacionesByCategoria } from "@/lib/publicaciones";
 import { getLatestChannelVideos } from "@/lib/youtube";
 import { VideoItem } from "@/types";
+
+// Vuelve a generar la home (con las publicaciones más recientes de
+// Supabase y los últimos videos de YouTube) como máximo cada 60 segundos.
+export const revalidate = 60;
 
 interface NoticieroGroups {
   destacados: VideoItem[];
@@ -49,8 +55,26 @@ async function getNoticieroGroups(): Promise<NoticieroGroups> {
   }
 }
 
+/**
+ * Trae las últimas 4 publicaciones de Supabase para el bloque de una
+ * categoría en la home. Si todavía no hay publicaciones reales en esa
+ * categoría, muestra los datos de ejemplo en su lugar.
+ */
+async function getCategoriaGroup(
+  categoria: CategoryKey,
+  sample: VideoItem[],
+): Promise<VideoItem[]> {
+  const items = await getPublicacionesByCategoria(categoria, 4);
+  return items.length > 0 ? items : sample;
+}
+
 export default async function Home() {
-  const noticiero = await getNoticieroGroups();
+  const [noticiero, educacion, gremiales, nacionales] = await Promise.all([
+    getNoticieroGroups(),
+    getCategoriaGroup("educacion", videos.educacion),
+    getCategoriaGroup("gremiales", videos.gremiales),
+    getCategoriaGroup("nacionales", videos.nacionales),
+  ]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -72,15 +96,15 @@ export default async function Home() {
 
           <AdBlock block={3} />
 
-          <NewsVideoSection title="Educación" items={videos.educacion} category="educacion" />
+          <NewsVideoSection title="Educación" items={educacion} category="educacion" />
 
           <AdBlock block={4} />
 
-          <NewsVideoSection title="Gremiales" items={videos.gremiales} category="gremiales" />
+          <NewsVideoSection title="Gremiales" items={gremiales} category="gremiales" />
 
           <AdBlock block={5} />
 
-          <NewsVideoSection title="Nacionales" items={videos.nacionales} category="nacionales" />
+          <NewsVideoSection title="Nacionales" items={nacionales} category="nacionales" />
         </main>
 
         <Sidebar />

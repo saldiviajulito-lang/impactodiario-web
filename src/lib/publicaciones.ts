@@ -42,7 +42,10 @@ export async function getPublicacionesByFuncionario(slug: string): Promise<Video
  * Trae las publicaciones activas de una categoría. "noticiero" es especial:
  * devuelve todas las publicaciones activas, sin filtrar por categoría.
  */
-export async function getPublicacionesByCategoria(categoria: string): Promise<VideoItem[]> {
+export async function getPublicacionesByCategoria(
+  categoria: string,
+  limit?: number,
+): Promise<VideoItem[]> {
   try {
     const supabase = getSupabaseClient();
 
@@ -54,6 +57,10 @@ export async function getPublicacionesByCategoria(categoria: string): Promise<Vi
 
     if (categoria !== "noticiero") {
       query = query.eq("categoria", categoria);
+    }
+
+    if (limit) {
+      query = query.limit(limit);
     }
 
     const { data, error } = await query;
