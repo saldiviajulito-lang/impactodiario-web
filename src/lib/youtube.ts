@@ -122,18 +122,33 @@ export async function getLatestChannelVideos(maxResults = 10): Promise<YoutubeVi
 }
 
 interface YoutubeVideosListResponse {
-  items?: { id: string }[];
+  items?: {
+    id: string;
+    snippet?: {
+      thumbnails?: {
+        high?: YoutubeThumbnail;
+        medium?: YoutubeThumbnail;
+        default?: YoutubeThumbnail;
+      };
+    };
+  }[];
 }
 
 /**
  * Filtra una lista de VideoItem dejando solo los que siguen existiendo en
  * YouTube (por ejemplo, saca los que el usuario borró después de haberlos
- * publicado). Usa videos.list en lotes de hasta 50 ids (1 unidad de cuota
- * por lote, sin importar cuántos ids se pidan).
+ * publicado), y corrige el thumbnail de cada uno con el que devuelve la
+ * propia API de YouTube. Esto es necesario porque el thumbnail que se
+ * guarda en Supabase al publicar usa el endpoint estático
+ * img.youtube.com/vi/{id}/maxresdefault.jpg, que para videos verticales
+ * (Shorts) devuelve una imagen rellenada/difuminada en 16:9 en vez del
+ * cuadro real del video.
  *
- * Si no hay YOUTUBE_API_KEY configurada, o falla la verificación, devuelve
- * la lista sin filtrar — preferimos mostrar de más antes que ocultar todo
- * por un problema temporal de la API.
+ * Usa videos.list en lotes de hasta 50 ids (1 unidad de cuota por lote,
+ * sin importar cuántos ids se pidan). Si no hay YOUTUBE_API_KEY
+ * configurada, o falla la verificación, devuelve la lista sin tocar —
+ * preferimos mostrar de más (o con el thumbnail original) antes que
+ * ocultar todo por un problema temporal de la API.
  */
 export async function filterAvailableVideos(items: VideoItem[]): Promise<VideoItem[]> {
   const apiKey = process.env.YOUTUBE_API_KEY;
@@ -151,10 +166,11 @@ export async function filterAvailableVideos(items: VideoItem[]): Promise<VideoIt
 
   try {
     const availableIds = new Set<string>();
+    const thumbnailsById = new Map<string, string>();
 
     for (let i = 0; i < uniqueIds.length; i += 50) {
       const chunk = uniqueIds.slice(i, i + 50);
-      const url = `${YOUTUBE_API_BASE}/videos?part=id&id=${chunk.join(",")}&key=${apiKey}`;
+      const url = `${YOUTUBE_API_BASE}/videos?part=id,snippet&id=${chunk.join(",")}&key=${apiKey}`;
       const res = await fetch(url, { next: { revalidate: CACHE_SECONDS } });
 
       if (!res.ok) {
@@ -162,16 +178,27 @@ export async function filterAvailableVideos(items: VideoItem[]): Promise<VideoIt
       }
 
       const data: YoutubeVideosListResponse = await res.json();
-      (data.items ?? []).forEach((video) => availableIds.add(video.id));
+      (data.items ?? []).forEach((video) => {
+        availableIds.add(video.id);
+        const thumbnailUrl = video.snippet?.thumbnails ? pickThumbnail(video.snippet.thumbnails) : "";
+        if (thumbnailUrl) {
+          thumbnailsById.set(video.id, thumbnailUrl);
+        }
+      });
     }
 
-    return items.filter((item, index) => {
-      const id = idsByItem[index];
-      // Si el item no tiene id de YouTube (ej. datos de ejemplo sin url real),
-      // no lo tocamos: este filtro solo saca videos de YouTube confirmados
-      // como no disponibles.
-      return !id || availableIds.has(id);
-    });
+    return items
+      .map((item, index) => ({ item, id: idsByItem[index] }))
+      .filter(({ id }) => {
+        // Si el item no tiene id de YouTube (ej. datos de ejemplo sin url real),
+        // no lo tocamos: este filtro solo saca videos de YouTube confirmados
+        // como no disponibles.
+        return !id || availableIds.has(id);
+      })
+      .map(({ item, id }) => {
+        const thumbnailCorregido = id ? thumbnailsById.get(id) : undefined;
+        return thumbnailCorregido ? { ...item, thumbnailUrl: thumbnailCorregido } : item;
+      });
   } catch (error) {
     console.error("No se pudo verificar disponibilidad de videos en YouTube:", error);
     return items;
