@@ -1,5 +1,5 @@
 import SectionTitle from "@/components/common/SectionTitle";
-import VideoCard from "@/components/videos/VideoCard";
+import VerticalVideoCard from "@/components/videos/VerticalVideoCard";
 import { VideoItem } from "@/types";
 
 interface VideoGridSectionProps {
@@ -20,9 +20,9 @@ export default function VideoGridSection({ title, videos, emptyMessage }: VideoG
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="flex flex-wrap justify-center gap-4">
           {videos.map((video) => (
-            <VideoCard key={video.id} video={video} />
+            <VerticalVideoCard key={video.id} video={video} />
           ))}
         </div>
       )}
