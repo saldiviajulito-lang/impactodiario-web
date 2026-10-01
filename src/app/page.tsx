@@ -15,54 +15,14 @@ import { VideoItem } from "@/types";
 // Supabase y los últimos videos de YouTube) como máximo cada 60 segundos.
 export const revalidate = 60;
 
-interface NoticieroGroups {
-  destacados: VideoItem[];
-  fila1: VideoItem[];
-  fila2: VideoItem[];
-}
-
-const SAMPLE_NOTICIERO_GROUPS: NoticieroGroups = {
-  destacados: videos.noticieroDestacados,
-  fila1: videos.noticieroFila1,
-  fila2: videos.noticieroFila2,
-};
-
-async function getNoticieroGroups(): Promise<NoticieroGroups> {
-  try {
-    const channelVideos = await getLatestChannelVideos(10);
-
-    if (channelVideos.length === 0) {
-      return SAMPLE_NOTICIERO_GROUPS;
-    }
-
-    const items: VideoItem[] = channelVideos.map((video) => ({
-      id: video.videoId,
-      title: video.title,
-      thumbnailUrl: video.thumbnailUrl,
-      url: video.url,
-    }));
-
-    return {
-      destacados: items.slice(0, 2),
-      fila1: items.slice(2, 6),
-      fila2: items.slice(6, 10),
-    };
-  } catch (error) {
-    // Sin YOUTUBE_API_KEY / YOUTUBE_CHANNEL_ID configuradas, o error de la API:
-    // mostramos los datos de ejemplo en vez de romper la home.
-    console.error("No se pudieron obtener videos de YouTube, usando datos de ejemplo:", error);
-    return SAMPLE_NOTICIERO_GROUPS;
-  }
-}
-
 /**
- * Trae los últimos 5 videos del canal para la fila vertical (9:16) de la
- * home. Si no hay API de YouTube configurada o falla, muestra datos de
- * ejemplo en su lugar.
+ * Trae los últimos 10 videos del canal para las dos filas verticales (9:16)
+ * de la home. Si no hay API de YouTube configurada o falla, muestra datos
+ * de ejemplo en su lugar.
  */
 async function getUltimosVerticales(sample: VideoItem[]): Promise<VideoItem[]> {
   try {
-    const channelVideos = await getLatestChannelVideos(5);
+    const channelVideos = await getLatestChannelVideos(10);
 
     if (channelVideos.length === 0) {
       return sample;
@@ -94,9 +54,8 @@ async function getCategoriaGroup(
 }
 
 export default async function Home() {
-  const [verticales, noticiero, educacion, gremiales, nacionales] = await Promise.all([
+  const [verticales, educacion, gremiales, nacionales] = await Promise.all([
     getUltimosVerticales(videos.verticalesNoticiero),
-    getNoticieroGroups(),
     getCategoriaGroup("educacion", videos.educacion),
     getCategoriaGroup("gremiales", videos.gremiales),
     getCategoriaGroup("nacionales", videos.nacionales),
@@ -110,12 +69,7 @@ export default async function Home() {
         <main className="w-full lg:w-3/4">
           <AdBlock block={1} />
 
-          <NoticieroTvSection
-            verticales={verticales}
-            destacados={noticiero.destacados}
-            fila1={noticiero.fila1}
-            fila2={noticiero.fila2}
-          />
+          <NoticieroTvSection verticales={verticales} />
 
           <AdBlock block={2} />
 

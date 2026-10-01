@@ -43,10 +43,7 @@ function officialsFromNames(
 }
 
 export const videos = {
-  noticieroDestacados: makeVideos("noticiero-destacado", 2),
-  noticieroFila1: makeVideos("noticiero-fila1", 4),
-  noticieroFila2: makeVideos("noticiero-fila2", 4),
-  verticalesNoticiero: makeVideos("vertical-noticiero", 5),
+  verticalesNoticiero: makeVideos("vertical-noticiero", 10),
   educacion: makeVideos("educacion", 5),
   gremiales: makeVideos("gremiales", 5),
   nacionales: makeVideos("nacionales", 5),
