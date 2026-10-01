@@ -1,4 +1,4 @@
-export type CategoryKey = "educacion" | "gremiales" | "nacionales";
+export type CategoryKey = "policiales" | "sociales" | "gremiales" | "deportes" | "educacion";
 
 export interface CategoryBadge {
   label: string;
@@ -6,7 +6,9 @@ export interface CategoryBadge {
 }
 
 export const categoryBadges: Record<CategoryKey, CategoryBadge> = {
-  educacion: { label: "Educación", color: "#22c55e" },
+  policiales: { label: "Policiales", color: "#ef4444" },
+  sociales: { label: "Sociales", color: "#a855f7" },
   gremiales: { label: "Gremiales", color: "#f97316" },
-  nacionales: { label: "Nacionales", color: "#3b82f6" },
+  deportes: { label: "Deportes", color: "#eab308" },
+  educacion: { label: "Educación", color: "#22c55e" },
 };

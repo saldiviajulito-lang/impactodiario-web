@@ -44,9 +44,11 @@ function officialsFromNames(
 
 export const videos = {
   verticalesNoticiero: makeVideos("vertical-noticiero", 10),
-  educacion: makeVideos("educacion", 5),
+  policiales: makeVideos("policiales", 5),
+  sociales: makeVideos("sociales", 5),
   gremiales: makeVideos("gremiales", 5),
-  nacionales: makeVideos("nacionales", 5),
+  deportes: makeVideos("deportes", 5),
+  educacion: makeVideos("educacion", 5),
 };
 
 export const officials = {

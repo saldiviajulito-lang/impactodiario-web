@@ -10,9 +10,11 @@ import { getPublicacionesByCategoria } from "@/lib/publicaciones";
 
 const CATEGORIA_LABELS: Record<string, string> = {
   noticiero: "Noticiero iD.tv",
-  educacion: "Educación",
+  policiales: "Policiales",
+  sociales: "Sociales",
   gremiales: "Gremiales",
-  nacionales: "Nacionales",
+  deportes: "Deportes",
+  educacion: "Educación",
 };
 
 // Vuelve a generar la página (con las publicaciones más recientes de

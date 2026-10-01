@@ -1,12 +1,10 @@
 import AdBlock from "@/components/ads/AdBlock";
-import FacebookReelsSection from "@/components/facebook/FacebookReelsSection";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/sidebar/Sidebar";
 import NewsVideoSection from "@/components/videos/NewsVideoSection";
 import NoticieroTvSection from "@/components/videos/NoticieroTvSection";
 import { videos } from "@/data/sampleData";
 import { CategoryKey } from "@/lib/categoryBadges";
-import { policialesReels } from "@/lib/facebookReels";
 import { getPublicacionesByCategoria } from "@/lib/publicaciones";
 import { getLatestChannelVideos } from "@/lib/youtube";
 import { VideoItem } from "@/types";
@@ -54,11 +52,13 @@ async function getCategoriaGroup(
 }
 
 export default async function Home() {
-  const [verticales, educacion, gremiales, nacionales] = await Promise.all([
+  const [verticales, policiales, sociales, gremiales, deportes, educacion] = await Promise.all([
     getUltimosVerticales(videos.verticalesNoticiero),
-    getCategoriaGroup("educacion", videos.educacion),
+    getCategoriaGroup("policiales", videos.policiales),
+    getCategoriaGroup("sociales", videos.sociales),
     getCategoriaGroup("gremiales", videos.gremiales),
-    getCategoriaGroup("nacionales", videos.nacionales),
+    getCategoriaGroup("deportes", videos.deportes),
+    getCategoriaGroup("educacion", videos.educacion),
   ]);
 
   return (
@@ -73,11 +73,11 @@ export default async function Home() {
 
           <AdBlock block={2} />
 
-          <FacebookReelsSection title="Policiales" reels={policialesReels} />
+          <NewsVideoSection title="Policiales" items={policiales} category="policiales" />
 
           <AdBlock block={3} />
 
-          <NewsVideoSection title="Educación" items={educacion} category="educacion" />
+          <NewsVideoSection title="Sociales" items={sociales} category="sociales" />
 
           <AdBlock block={4} />
 
@@ -85,7 +85,11 @@ export default async function Home() {
 
           <AdBlock block={5} />
 
-          <NewsVideoSection title="Nacionales" items={nacionales} category="nacionales" />
+          <NewsVideoSection title="Deportes" items={deportes} category="deportes" />
+
+          <AdBlock block={6} />
+
+          <NewsVideoSection title="Educación" items={educacion} category="educacion" />
         </main>
 
         <Sidebar />
