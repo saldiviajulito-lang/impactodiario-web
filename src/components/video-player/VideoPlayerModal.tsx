@@ -36,7 +36,7 @@ export default function VideoPlayerModal() {
       onClick={closeVideo}
     >
       <div
-        className="relative w-full max-w-5xl"
+        className="relative w-full max-w-[400px]"
         onClick={(event) => event.stopPropagation()}
       >
         <button
@@ -48,7 +48,7 @@ export default function VideoPlayerModal() {
           ×
         </button>
 
-        <div className="aspect-video w-full overflow-hidden rounded-lg bg-black shadow-2xl">
+        <div className="aspect-[9/16] w-full overflow-hidden rounded-lg bg-black shadow-2xl">
           <iframe
             key={openVideoId}
             src={`https://www.youtube.com/embed/${openVideoId}?autoplay=1`}

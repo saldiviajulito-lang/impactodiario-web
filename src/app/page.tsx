@@ -56,6 +56,31 @@ async function getNoticieroGroups(): Promise<NoticieroGroups> {
 }
 
 /**
+ * Trae los últimos 4 videos del canal para la fila vertical (9:16) de la
+ * home. Si no hay API de YouTube configurada o falla, muestra datos de
+ * ejemplo en su lugar.
+ */
+async function getUltimosVerticales(sample: VideoItem[]): Promise<VideoItem[]> {
+  try {
+    const channelVideos = await getLatestChannelVideos(4);
+
+    if (channelVideos.length === 0) {
+      return sample;
+    }
+
+    return channelVideos.map((video) => ({
+      id: video.videoId,
+      title: video.title,
+      thumbnailUrl: video.thumbnailUrl,
+      url: video.url,
+    }));
+  } catch (error) {
+    console.error("No se pudieron obtener los últimos videos verticales, usando datos de ejemplo:", error);
+    return sample;
+  }
+}
+
+/**
  * Trae las últimas 4 publicaciones de Supabase para el bloque de una
  * categoría en la home. Si todavía no hay publicaciones reales en esa
  * categoría, muestra los datos de ejemplo en su lugar.
@@ -69,7 +94,8 @@ async function getCategoriaGroup(
 }
 
 export default async function Home() {
-  const [noticiero, educacion, gremiales, nacionales] = await Promise.all([
+  const [verticales, noticiero, educacion, gremiales, nacionales] = await Promise.all([
+    getUltimosVerticales(videos.noticieroFila1),
     getNoticieroGroups(),
     getCategoriaGroup("educacion", videos.educacion),
     getCategoriaGroup("gremiales", videos.gremiales),
@@ -85,6 +111,7 @@ export default async function Home() {
           <AdBlock block={1} />
 
           <NoticieroTvSection
+            verticales={verticales}
             destacados={noticiero.destacados}
             fila1={noticiero.fila1}
             fila2={noticiero.fila2}

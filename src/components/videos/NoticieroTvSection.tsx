@@ -1,16 +1,19 @@
 import Link from "next/link";
 
 import SectionTitle from "@/components/common/SectionTitle";
+import VerticalVideoCard from "@/components/videos/VerticalVideoCard";
 import VideoCard from "@/components/videos/VideoCard";
 import { VideoItem } from "@/types";
 
 interface NoticieroTvSectionProps {
+  verticales: VideoItem[];
   destacados: VideoItem[];
   fila1: VideoItem[];
   fila2: VideoItem[];
 }
 
 export default function NoticieroTvSection({
+  verticales,
   destacados,
   fila1,
   fila2,
@@ -18,6 +21,12 @@ export default function NoticieroTvSection({
   return (
     <section className="relative mb-8">
       <SectionTitle>Noticiero iD.tv</SectionTitle>
+
+      <div className="mb-4 flex justify-center gap-4">
+        {verticales.map((video) => (
+          <VerticalVideoCard key={video.id} video={video} />
+        ))}
+      </div>
 
       <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {destacados.map((video) => (
