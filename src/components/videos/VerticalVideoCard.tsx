@@ -1,14 +1,16 @@
 "use client";
 
 import { useVideoPlayer } from "@/context/VideoPlayerContext";
+import { CategoryBadge } from "@/lib/categoryBadges";
 import { extractYoutubeVideoId } from "@/lib/extractYoutubeId";
 import { VideoItem } from "@/types";
 
 interface VerticalVideoCardProps {
   video: VideoItem;
+  badge?: CategoryBadge;
 }
 
-export default function VerticalVideoCard({ video }: VerticalVideoCardProps) {
+export default function VerticalVideoCard({ video, badge }: VerticalVideoCardProps) {
   const { openVideo } = useVideoPlayer();
   const youtubeId = video.url ? extractYoutubeVideoId(video.url) : null;
 
@@ -27,6 +29,14 @@ export default function VerticalVideoCard({ video }: VerticalVideoCardProps) {
           ▶
         </span>
       </span>
+      {badge && (
+        <span
+          className="absolute left-2 top-2 rounded px-2 py-0.5 text-[10px] font-semibold uppercase text-white"
+          style={{ backgroundColor: badge.color }}
+        >
+          {badge.label}
+        </span>
+      )}
     </div>
   );
 

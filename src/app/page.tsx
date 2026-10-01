@@ -56,13 +56,13 @@ async function getNoticieroGroups(): Promise<NoticieroGroups> {
 }
 
 /**
- * Trae los últimos 4 videos del canal para la fila vertical (9:16) de la
+ * Trae los últimos 5 videos del canal para la fila vertical (9:16) de la
  * home. Si no hay API de YouTube configurada o falla, muestra datos de
  * ejemplo en su lugar.
  */
 async function getUltimosVerticales(sample: VideoItem[]): Promise<VideoItem[]> {
   try {
-    const channelVideos = await getLatestChannelVideos(4);
+    const channelVideos = await getLatestChannelVideos(5);
 
     if (channelVideos.length === 0) {
       return sample;
@@ -81,7 +81,7 @@ async function getUltimosVerticales(sample: VideoItem[]): Promise<VideoItem[]> {
 }
 
 /**
- * Trae las últimas 4 publicaciones de Supabase para el bloque de una
+ * Trae las últimas 5 publicaciones de Supabase para el bloque de una
  * categoría en la home. Si todavía no hay publicaciones reales en esa
  * categoría, muestra los datos de ejemplo en su lugar.
  */
@@ -89,13 +89,13 @@ async function getCategoriaGroup(
   categoria: CategoryKey,
   sample: VideoItem[],
 ): Promise<VideoItem[]> {
-  const items = await getPublicacionesByCategoria(categoria, 4);
+  const items = await getPublicacionesByCategoria(categoria, 5);
   return items.length > 0 ? items : sample;
 }
 
 export default async function Home() {
   const [verticales, noticiero, educacion, gremiales, nacionales] = await Promise.all([
-    getUltimosVerticales(videos.noticieroFila1),
+    getUltimosVerticales(videos.verticalesNoticiero),
     getNoticieroGroups(),
     getCategoriaGroup("educacion", videos.educacion),
     getCategoriaGroup("gremiales", videos.gremiales),

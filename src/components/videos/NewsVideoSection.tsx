@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import SectionTitle from "@/components/common/SectionTitle";
-import VideoCard from "@/components/videos/VideoCard";
+import VerticalVideoCard from "@/components/videos/VerticalVideoCard";
 import { categoryBadges, CategoryKey } from "@/lib/categoryBadges";
 import { VideoItem } from "@/types";
 
@@ -17,9 +17,9 @@ export default function NewsVideoSection({ title, items, category }: NewsVideoSe
   return (
     <section className="relative mb-8">
       <SectionTitle>{title}</SectionTitle>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="flex justify-center gap-4">
         {items.map((video) => (
-          <VideoCard key={video.id} video={video} badge={badge} />
+          <VerticalVideoCard key={video.id} video={video} badge={badge} />
         ))}
       </div>
 
